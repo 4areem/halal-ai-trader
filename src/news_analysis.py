@@ -392,6 +392,175 @@ def aggregate_sentiment(items: list[NewsItem]) -> tuple[Sentiment, float]:
 
 
 # ---------------------------------------------------------------------------
+# LLM-Powered Analysis (Anthropic Claude)
+# ---------------------------------------------------------------------------
+
+def _get_anthropic_client():
+    """Lazy-load the Anthropic client to avoid import cost when not using AI."""
+    import anthropic
+    from src.config import ANTHROPIC_API_KEY
+    if not ANTHROPIC_API_KEY:
+        raise ValueError(
+            "ANTHROPIC_API_KEY not set in .env — required for --use-ai mode"
+        )
+    return anthropic.Anthropic(api_key=ANTHROPIC_API_KEY)
+
+
+def analyze_ticker_with_llm(
+    ticker: str,
+    company_name: str,
+    items: list[NewsItem],
+) -> dict:
+    """Send news articles to Claude for deep sentiment analysis.
+
+    Returns the parsed JSON response from the LLM with per-article
+    classifications and an overall assessment.
+    """
+    from src.config import AI_MODEL
+
+    if not items:
+        return {
+            "articles": [],
+            "overall": {
+                "sentiment": "NEUTRAL",
+                "confidence": "LOW",
+                "actionable": False,
+                "signal_strength": 0.0,
+                "reasoning": "No news to analyze.",
+                "recommended_action": "NO_ACTION",
+                "contrarian_flag": None,
+            },
+        }
+
+    client = _get_anthropic_client()
+    prompt = build_analysis_prompt(ticker, company_name, items)
+
+    # Enhance the prompt with contrarian opportunity detection
+    enhanced_prompt = prompt.replace(
+        'Respond in this exact JSON format:',
+        """Also check for CONTRARIAN OPPORTUNITIES:
+- Has a solid company dropped 10%+ on news that doesn't fundamentally impair the business?
+- Is the market overreacting to a one-time event?
+- If you spot a contrarian opportunity, add a "contrarian_flag" field to the overall section
+  with a brief explanation. Otherwise set it to null.
+
+Respond in this exact JSON format:"""
+    )
+
+    # Add contrarian_flag to the JSON template
+    enhanced_prompt = enhanced_prompt.replace(
+        '    "recommended_action": "NO_ACTION"\n  }\n}',
+        '    "recommended_action": "NO_ACTION",\n'
+        '    "contrarian_flag": null\n  }\n}'
+    )
+
+    system_prompt = (
+        "You are a financial news analyst for a Shariah-compliant investment fund. "
+        "You analyze news sentiment with precision and nuance. You understand that "
+        "most news is noise — only material events that affect fundamental earning "
+        "power deserve strong sentiment scores. You weight Tier 1-2 sources "
+        "(SEC filings, Reuters, Bloomberg) more heavily than Tier 3-4 sources "
+        "(Benzinga, social media). You are especially alert to contrarian "
+        "opportunities where the market overreacts to bad news on solid companies. "
+        "You respond ONLY with valid JSON, no markdown or commentary."
+    )
+
+    try:
+        response = client.messages.create(
+            model=AI_MODEL,
+            max_tokens=4096,
+            system=system_prompt,
+            messages=[{"role": "user", "content": enhanced_prompt}],
+        )
+
+        # Extract text from response
+        text = ""
+        for block in response.content:
+            if block.type == "text":
+                text = block.text
+                break
+
+        # Parse JSON — strip any markdown fences the model might add
+        text = text.strip()
+        if text.startswith("```"):
+            text = text.split("\n", 1)[1]  # remove first line
+            if text.endswith("```"):
+                text = text[:-3]
+            text = text.strip()
+
+        result = json.loads(text)
+
+        # Log token usage
+        usage = response.usage
+        print(f"    AI: {usage.input_tokens} in / {usage.output_tokens} out tokens")
+
+        return result
+
+    except json.JSONDecodeError as e:
+        print(f"    AI: JSON parse error for {ticker}: {e}")
+        return None
+    except Exception as e:
+        print(f"    AI: Error analyzing {ticker}: {e}")
+        return None
+
+
+def apply_llm_results(
+    items: list[NewsItem],
+    llm_result: dict,
+) -> tuple[Sentiment, Confidence, float, str, str | None]:
+    """Apply LLM analysis results back onto NewsItem objects.
+
+    Returns (overall_sentiment, overall_confidence, signal_strength,
+             reasoning, contrarian_flag).
+    """
+    sentiment_map = {
+        "STRONG_POSITIVE": Sentiment.STRONG_POSITIVE,
+        "MILD_POSITIVE": Sentiment.MILD_POSITIVE,
+        "NEUTRAL": Sentiment.NEUTRAL,
+        "MILD_NEGATIVE": Sentiment.MILD_NEGATIVE,
+        "STRONG_NEGATIVE": Sentiment.STRONG_NEGATIVE,
+    }
+    confidence_map = {
+        "HIGH": Confidence.HIGH,
+        "MEDIUM": Confidence.MEDIUM,
+        "LOW": Confidence.LOW,
+    }
+
+    # Apply per-article results
+    articles = llm_result.get("articles", [])
+    for article_data in articles:
+        idx = article_data.get("article_num", 0) - 1
+        if 0 <= idx < len(items):
+            item = items[idx]
+            item.sentiment = sentiment_map.get(
+                article_data.get("sentiment", "NEUTRAL"), Sentiment.NEUTRAL
+            )
+            item.confidence = confidence_map.get(
+                article_data.get("confidence", "LOW"), Confidence.LOW
+            )
+            item.already_priced_in = article_data.get("already_priced_in", False)
+            item.is_trend = article_data.get("is_trend", False)
+            item.affects_fundamentals = article_data.get("affects_fundamentals", False)
+            item.so_what_reasoning = article_data.get("reasoning", "")
+
+    # Extract overall assessment
+    overall = llm_result.get("overall", {})
+    overall_sentiment = sentiment_map.get(
+        overall.get("sentiment", "NEUTRAL"), Sentiment.NEUTRAL
+    )
+    overall_confidence = confidence_map.get(
+        overall.get("confidence", "LOW"), Confidence.LOW
+    )
+    signal_strength = float(overall.get("signal_strength", 0.0))
+    # Clamp to valid range
+    signal_strength = max(-2.0, min(2.0, signal_strength))
+    reasoning = overall.get("reasoning", "")
+    contrarian = overall.get("contrarian_flag")
+
+    return overall_sentiment, overall_confidence, signal_strength, reasoning, contrarian
+
+
+# ---------------------------------------------------------------------------
 # Logging
 # ---------------------------------------------------------------------------
 

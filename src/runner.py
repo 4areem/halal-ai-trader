@@ -50,6 +50,8 @@ from src.news_analysis import (
     Sentiment,
     Confidence,
     aggregate_sentiment,
+    analyze_ticker_with_llm,
+    apply_llm_results,
     save_analysis_results,
     print_signal_report,
     SENTIMENT_SCORES,
@@ -148,13 +150,15 @@ def _mode_label(live: bool, auto: bool) -> str:
     return "LIVE_AUTO" if auto else "LIVE_CONFIRM"
 
 
-def session_startup(live: bool = False, auto: bool = False) -> dict:
+def session_startup(live: bool = False, auto: bool = False, use_ai: bool = False) -> dict:
     """Fetch account, positions, market status. Returns session context dict."""
     mode = _mode_label(live, auto)
+    analysis_mode = "AI (Claude)" if use_ai else "Rules-based"
     print("=" * 70)
     print("HALAL AI TRADER — SESSION START")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
     print(f"Mode:      {mode}")
+    print(f"Analysis:  {analysis_mode}")
     print("=" * 70)
 
     # Account
@@ -250,6 +254,7 @@ def session_startup(live: bool = False, auto: bool = False) -> dict:
     log_session({
         "phase": "startup",
         "mode": mode,
+        "analysis": analysis_mode,
         "equity": equity,
         "cash": cash,
         "buying_power": buying_power,
@@ -324,10 +329,10 @@ def _auto_classify_item(item):
     return item
 
 
-def analysis_phase(ctx: dict) -> list[TickerAnalysis]:
+def analysis_phase(ctx: dict, use_ai: bool = False) -> list[TickerAnalysis]:
     """Run news analysis pipeline on the full watchlist."""
     print(f"\n{'=' * 70}")
-    print("ANALYSIS PHASE")
+    print(f"ANALYSIS PHASE {'(AI-powered)' if use_ai else '(rules-based)'}")
     print("=" * 70)
 
     watchlist = load_watchlist()
@@ -336,15 +341,72 @@ def analysis_phase(ctx: dict) -> list[TickerAnalysis]:
     # Fetch and classify news
     news = fetch_watchlist_news(watchlist, hours_back=72)
 
+    # First pass: rules-based classification for all tickers (fast baseline)
+    for ticker_items in news.values():
+        for item in ticker_items:
+            _auto_classify_item(item)
+
+    # Identify tickers with enough news to justify AI analysis
+    ai_candidates = []
+    if use_ai:
+        for entry in watchlist:
+            ticker = entry["ticker"]
+            items = news.get(ticker, [])
+            if items:  # Only send tickers with news to the LLM
+                ai_candidates.append(ticker)
+        print(f"  AI analysis queued for {len(ai_candidates)} tickers with news")
+
+    # AI pass: run LLM analysis on tickers that have news
+    ai_results: dict[str, dict] = {}
+    if use_ai and ai_candidates:
+        print(f"\n--- Running Claude analysis ---")
+        for ticker in ai_candidates:
+            items = news.get(ticker, [])
+            name = name_map.get(ticker, ticker)
+            print(f"  Analyzing {ticker} ({len(items)} articles)...", end=" ")
+            result = analyze_ticker_with_llm(ticker, name, items)
+            if result:
+                ai_results[ticker] = result
+            else:
+                print(f"    (fallback to rules-based)")
+        print(f"  AI completed: {len(ai_results)}/{len(ai_candidates)} tickers\n")
+
     results = []
     for entry in watchlist:
         ticker = entry["ticker"]
         items = news.get(ticker, [])
 
-        for item in items:
-            _auto_classify_item(item)
+        # Use AI results if available, otherwise use rules-based
+        if ticker in ai_results:
+            llm_data = ai_results[ticker]
+            (overall_sentiment, conf, signal_strength,
+             reasoning, contrarian) = apply_llm_results(items, llm_data)
 
-        overall_sentiment, signal_strength = aggregate_sentiment(items)
+            # Prefix reasoning to show it came from AI
+            reasoning = f"[AI] {reasoning}"
+            if contrarian:
+                reasoning += f" | CONTRARIAN: {contrarian}"
+        else:
+            # Rules-based path (items already classified by _auto_classify_item)
+            overall_sentiment, signal_strength = aggregate_sentiment(items)
+            contrarian = None
+
+            if items:
+                pos_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] > 0)
+                neg_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] < 0)
+                neu_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] == 0)
+                top = max(items, key=lambda x: abs(SENTIMENT_SCORES[x.sentiment]))
+                reasoning = (f"{len(items)} articles: {pos_n}+, {neg_n}-, {neu_n} neutral. "
+                             f"Top: '{top.headline[:80]}'")
+            else:
+                reasoning = "No news in last 72 hours."
+
+            if len(items) >= 3 and abs(signal_strength) >= 1.0:
+                conf = Confidence.HIGH
+            elif len(items) >= 2 and abs(signal_strength) >= 0.5:
+                conf = Confidence.MEDIUM
+            else:
+                conf = Confidence.LOW
 
         actionable = (
             abs(signal_strength) >= 0.5
@@ -362,23 +424,6 @@ def analysis_phase(ctx: dict) -> list[TickerAnalysis]:
             action = "WATCH_SELL"
         else:
             action = "NO_ACTION"
-
-        if items:
-            pos_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] > 0)
-            neg_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] < 0)
-            neu_n = sum(1 for i in items if SENTIMENT_SCORES[i.sentiment] == 0)
-            top = max(items, key=lambda x: abs(SENTIMENT_SCORES[x.sentiment]))
-            reasoning = (f"{len(items)} articles: {pos_n}+, {neg_n}-, {neu_n} neutral. "
-                         f"Top: '{top.headline[:80]}'")
-        else:
-            reasoning = "No news in last 72 hours."
-
-        if len(items) >= 3 and abs(signal_strength) >= 1.0:
-            conf = Confidence.HIGH
-        elif len(items) >= 2 and abs(signal_strength) >= 0.5:
-            conf = Confidence.MEDIUM
-        else:
-            conf = Confidence.LOW
 
         results.append(TickerAnalysis(
             ticker=ticker,
@@ -1062,13 +1107,13 @@ def session_closeout(ctx: dict, decisions: list[TradeDecision], live: bool = Fal
 # Main
 # ---------------------------------------------------------------------------
 
-def run_session(live: bool = False, auto: bool = False):
+def run_session(live: bool = False, auto: bool = False, use_ai: bool = False):
     """Execute a full trading session."""
     # Phase 1: Startup
-    ctx = session_startup(live=live, auto=auto)
+    ctx = session_startup(live=live, auto=auto, use_ai=use_ai)
 
     # Phase 2: Analysis
-    analysis_results = analysis_phase(ctx)
+    analysis_results = analysis_phase(ctx, use_ai=use_ai)
     position_decisions = check_existing_positions(ctx)
 
     # Phase 3: Decisions
@@ -1095,12 +1140,17 @@ def main():
         action="store_true",
         help="Skip confirmation prompt (requires --live)",
     )
+    parser.add_argument(
+        "--use-ai",
+        action="store_true",
+        help="Use Claude LLM for news analysis (costs money, better signals)",
+    )
     args = parser.parse_args()
 
     if args.auto and not args.live:
         print("Warning: --auto has no effect without --live. Running in dry-run mode.\n")
 
-    run_session(live=args.live, auto=args.auto and args.live)
+    run_session(live=args.live, auto=args.auto and args.live, use_ai=args.use_ai)
 
 
 if __name__ == "__main__":

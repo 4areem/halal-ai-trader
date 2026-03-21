@@ -10,6 +10,10 @@ ALPACA_API_KEY = os.getenv("ALPACA_API_KEY")
 ALPACA_SECRET_KEY = os.getenv("ALPACA_SECRET_KEY")
 ALPACA_BASE_URL = os.getenv("ALPACA_BASE_URL", "https://paper-api.alpaca.markets")
 
+# Anthropic API (for LLM-powered news analysis)
+ANTHROPIC_API_KEY = os.getenv("ANTHROPIC_API_KEY")
+AI_MODEL = "claude-sonnet-4-20250514"
+
 # Trading Parameters
 MAX_POSITION_PCT = 0.10
 MAX_POSITIONS = 10
