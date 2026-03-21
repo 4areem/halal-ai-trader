@@ -1,0 +1,43 @@
+[
+  {
+    "ticker": "AMZN",
+    "name": "Amazon.com Inc",
+    "sector": "Consumer Discretionary",
+    "shariah_status": "UNCERTAIN",
+    "screening_date": "2026-03-21",
+    "screener_sources": {
+      "musaffa": "DOUBTFUL",
+      "halalsignalz": "MSCI (not AAOIFI)",
+      "amalinvest": "Doubtful",
+      "muslim_xchange": "Compliant",
+      "islamicly": "Compliant (DP Ratio 4.51%)"
+    },
+    "notes": "Borderline/mostly compliant. Muslim Xchange and Islamicly say yes, Musaffa says doubtful. DP ratio 4.51% — very close to 5% ceiling. AWS cloud is clean but Amazon has financial services (Amazon Lending, BNPL), sells alcohol, and has Prime Video content. Held in SPUS halal ETF. Could arguably be marked COMPLIANT per user guidance (lean toward inclusion), but the 4.51% ratio being so close to the 5% limit warrants caution."
+  },
+  {
+    "ticker": "WMT",
+    "name": "Walmart Inc",
+    "sector": "Consumer Staples",
+    "shariah_status": "UNCERTAIN",
+    "screening_date": "2026-03-21",
+    "screener_sources": {
+      "musaffa": "DOUBTFUL",
+      "amalinvest": "Doubtful",
+      "muslim_xchange": "Compliant",
+      "sharlife": "Not Compliant"
+    },
+    "notes": "Sells alcohol and tobacco (small % of $681.5B revenue). Interest income $483M = 0.07% of revenue (very low). Screeners disagree — likely borderline on business activity screen rather than financial ratios. Similar issue to Costco."
+  },
+  {
+    "ticker": "KO",
+    "name": "Coca-Cola Co",
+    "sector": "Consumer Staples",
+    "shariah_status": "UNCERTAIN",
+    "screening_date": "2026-03-21",
+    "screener_sources": {
+      "musaffa": "NOT HALAL (deep research) / HALAL (initial fetch)",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "CONFLICTING DATA: Initial Musaffa fetch said HALAL, but deep research agent found Musaffa rates NOT HALAL. The issue: KO has expanded into alcoholic beverages — Topo Chico Hard Seltzer, Simply Spiked, Fresca Mixed, and Jack Daniel's & Coca-Cola (licensing with Molson Coors). Revenue from alcohol is small but GROWING. This is a trend to monitor. Muslim Xchange still says compliant. Moving to review pending clarification."
+  }
+]

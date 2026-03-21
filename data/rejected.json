@@ -1,0 +1,115 @@
+[
+  {
+    "ticker": "MSFT",
+    "name": "Microsoft Corp",
+    "sector": "Technology",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Zoya: NOT HALAL. Both major screeners reject. Likely fails interest-bearing securities ratio — Microsoft holds massive cash/securities that may push ratio above 30%. Interest income $3.16B / ~$248B revenue = 1.27%. Muslim Xchange and Islamicly say compliant, and MSFT is held in HLAL/SPUS ETFs — but the two primary screeners (Musaffa+Zoya) both say no.",
+    "debt_ratio": 0.027,
+    "impure_revenue": 0.0127,
+    "notes": "Most contested stock. 2 screeners fail, 2 pass + held in halal ETFs. Erring on side of caution. Re-evaluate quarterly — if Musaffa or Zoya flip, promote to watchlist."
+  },
+  {
+    "ticker": "COST",
+    "name": "Costco Wholesale Corp",
+    "sector": "Consumer Staples",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Costco is the world's largest alcohol retailer. Alcohol revenue ~4.26% of total — just below the 5% AAOIFI threshold. Also sells pork and tobacco. Muslim Xchange says compliant. Islamicly reports 4.26% prohibited income.",
+    "notes": "Right at the edge of 5% impure revenue. Any increase in alcohol sales could push over. Too close to threshold for comfort."
+  },
+  {
+    "ticker": "HON",
+    "name": "Honeywell International Inc",
+    "sector": "Industrials",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Defense revenue ~13-15% of total revenue. Provides guidance systems, inertial measurement units for guided bombs/missiles/drones. Involved in U.S. nuclear weapons program. Muslim Xchange says compliant.",
+    "notes": "Defense exposure is the issue. 15% defense revenue is well above 5% impure revenue threshold. Nuclear weapons involvement is particularly concerning."
+  },
+  {
+    "ticker": "DE",
+    "name": "Deere & Co",
+    "sector": "Industrials",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Muslim Xchange: NOT COMPLIANT. John Deere Financial provides interest-bearing loans and financing — this is conventional lending (riba). The financial services arm is a major segment.",
+    "notes": "Embedded financial services/lending business is the primary disqualifier. Equipment business itself is permissible."
+  },
+  {
+    "ticker": "GE",
+    "name": "GE Aerospace",
+    "sector": "Industrials",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Muslim Xchange: NOT COMPLIANT. Defense & Propulsion Technologies segment ~$9B / $32B total revenue = ~28% defense. Produces engines for F-15, F-16, Black Hawk, Apache military platforms.",
+    "notes": "28% defense revenue is well above 5% threshold. Clear non-compliant."
+  },
+  {
+    "ticker": "NEE",
+    "name": "NextEra Energy Inc",
+    "sector": "Utilities",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Muslim Xchange: NOT COMPLIANT. Zoya: NOT COMPLIANT. Debt-to-equity ratio 1.83 — extremely high leverage. Utilities typically carry heavy debt, pushing interest-bearing debt/market cap above 30%. Business (renewable energy) is perfectly halal — fails purely on financial screen.",
+    "notes": "Common pattern: utilities fail on leverage, not business activity. Clean energy thesis is good but financial structure fails AAOIFI."
+  },
+  {
+    "ticker": "PFE",
+    "name": "Pfizer Inc",
+    "sector": "Healthcare",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Debt ~$64.8B / MCap ~$155.6B = ~41.6% — clearly exceeds 30% AAOIFI threshold. Impure revenue only 0.96% (passes). Muslim Xchange says compliant (likely uses different methodology).",
+    "debt_ratio": 0.416,
+    "impure_revenue": 0.0096,
+    "notes": "Debt from Seagen acquisition ($43B) is the sole issue. Pharmaceutical business is permissible. As debt is paid down and/or market cap recovers, could become compliant. Monitor quarterly."
+  },
+  {
+    "ticker": "AMGN",
+    "name": "Amgen Inc",
+    "sector": "Healthcare",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Zoya: NOT COMPLIANT. Muslim Xchange: NOT COMPLIANT (passes 0 of 5 standards). Debt ~$60.9B / MCap ~$190B = ~32% — exceeds 30% threshold.",
+    "debt_ratio": 0.32,
+    "notes": "Unanimous non-compliant across all screeners. Horizon Therapeutics acquisition debt. Actively deleveraging ($4.3B retired in H1 2025). Could potentially cross threshold in future."
+  },
+  {
+    "ticker": "UNH",
+    "name": "UnitedHealth Group Inc",
+    "sector": "Healthcare",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "PROHIBITED INDUSTRY: Conventional insurance. Musaffa: NOT HALAL. Zoya: NOT COMPLIANT. Sharlife: FAILED. Amal Invest: HARAM. Insurance involves gharar (excessive uncertainty), maysir (gambling-like risk transfer), and riba (interest) in premium investment.",
+    "notes": "Automatic reject — core business is conventional insurance. Unanimous across all screeners."
+  },
+  {
+    "ticker": "LMT",
+    "name": "Lockheed Martin Corp",
+    "sector": "Industrials",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "PROHIBITED INDUSTRY: Weapons manufacturing. 100% revenue from military systems (F-35, Trident missiles, Javelin, missile defense). Unanimous HARAM across all screeners.",
+    "notes": "Clearest exclusion in Islamic investing. No debate."
+  },
+  {
+    "ticker": "RTX",
+    "name": "RTX Corp (Raytheon)",
+    "sector": "Industrials",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "PROHIBITED INDUSTRY: Weapons and defense. Core business across all three segments (Collins Aerospace, Pratt & Whitney, Raytheon) is defense-oriented. Unanimous HARAM across all screeners.",
+    "notes": "Automatic reject — prohibited industry."
+  },
+  {
+    "ticker": "INTU",
+    "name": "Intuit Inc",
+    "sector": "Technology",
+    "shariah_status": "NON-COMPLIANT",
+    "screening_date": "2026-03-21",
+    "rejection_reason": "Musaffa: NOT HALAL. Owns Credit Karma (consumer lending/credit services) and QuickBooks Capital (small business lending). Financial services subsidiaries generate interest-based income.",
+    "notes": "Core tax/accounting software (TurboTax, QuickBooks) is fine — lending divisions are the issue."
+  }
+]

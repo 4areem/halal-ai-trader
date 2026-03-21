@@ -1,0 +1,557 @@
+[
+  {
+    "ticker": "AAPL",
+    "name": "Apple Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.024,
+    "securities_ratio": 0.012,
+    "impure_revenue": 0.0,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI, MSCI",
+      "amalinvest": "Halal (C-)",
+      "zoya": "Halal",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt $90.5B / MCap ~$3.75T = 2.4%. Securities $45.3B / MCap = 1.2%. Interest income ~0%. C- rating from services segment growth (Apple Music, TV+). Monitor services revenue mix."
+  },
+  {
+    "ticker": "NVDA",
+    "name": "NVIDIA Corp",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.002,
+    "securities_ratio": 0.01,
+    "impure_revenue": 0.0102,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL (A grade)",
+      "halalsignalz": "AAOIFI, MSCI",
+      "amalinvest": "Halal (B+)",
+      "zoya": "Halal",
+      "halalscreener": "Halal (A+, score 92)"
+    },
+    "notes": "Cleanest compliance profile. Debt/MCap 0.2%, Securities/MCap 1.0%, Impure revenue 1.02%. Universal consensus across all screeners."
+  },
+  {
+    "ticker": "AVGO",
+    "name": "Broadcom Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.044,
+    "securities_ratio": 0.011,
+    "impure_revenue": 0.0059,
+    "purification_rate": 0.006,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI",
+      "amalinvest": "Halal (A-)",
+      "zoya": "Halal (A-)",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt $66B / MCap ~$1.51T = 4.4%. Securities $16.2B / MCap = 1.1%. Impure revenue $304M / $51.9B = 0.59%. Strong A- rating."
+  },
+  {
+    "ticker": "ADBE",
+    "name": "Adobe Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.031,
+    "securities_ratio": null,
+    "impure_revenue": 0.0,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "MSCI",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt $6.2B / MCap ~$200B = 3.1%. Zero reported interest income. Pure software/SaaS. Described as 'debt-free halal stock' by some analysts."
+  },
+  {
+    "ticker": "CRM",
+    "name": "Salesforce Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.05,
+    "securities_ratio": null,
+    "impure_revenue": 0.0,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI, MSCI",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt $9.1B / MCap ~$183B = 5.0%. Zero interest income. Enterprise cloud CRM."
+  },
+  {
+    "ticker": "CSCO",
+    "name": "Cisco Systems Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.099,
+    "securities_ratio": 0.052,
+    "impure_revenue": 0.0247,
+    "purification_rate": 0.025,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI",
+      "zoya": "Halal",
+      "halalinvestors": "Halal (Business 5/5, Financial 4/5)"
+    },
+    "notes": "Debt $30.1B / MCap ~$304B = 9.9%. Securities $15.8B / MCap = 5.2%. Interest income $1.37B / $55.2B revenue = 2.47%. Splunk acquisition added debt but ratios manageable."
+  },
+  {
+    "ticker": "ORCL",
+    "name": "Oracle Corp",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.233,
+    "securities_ratio": 0.087,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL (Q1 2026)",
+      "halalsignalz": "AAOIFI",
+      "zoya": "Halal",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt $104B / MCap ~$447B = 23.3% — highest on watchlist but passes 30% threshold. Securities $39.1B / MCap = 8.7%. MONITOR CLOSELY: if market cap drops significantly, could breach 30%."
+  },
+  {
+    "ticker": "QCOM",
+    "name": "Qualcomm Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Semiconductor and wireless technology. Pure tech play. Low debt profile."
+  },
+  {
+    "ticker": "AMD",
+    "name": "Advanced Micro Devices Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Semiconductor company. Low debt, no impure revenue concerns."
+  },
+  {
+    "ticker": "ASML",
+    "name": "ASML Holding NV",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Semiconductor lithography equipment. Essential chip manufacturing infrastructure. Clean business."
+  },
+  {
+    "ticker": "NOW",
+    "name": "ServiceNow Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Enterprise IT workflow automation software. Pure SaaS business."
+  },
+  {
+    "ticker": "SNPS",
+    "name": "Synopsys Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "EDA software for chip design. Niche tech, clean business."
+  },
+  {
+    "ticker": "ANET",
+    "name": "Arista Networks Inc",
+    "sector": "Technology",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Cloud networking equipment. Pure infrastructure tech play."
+  },
+  {
+    "ticker": "TSLA",
+    "name": "Tesla Inc",
+    "sector": "Consumer Discretionary",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.0175,
+    "securities_ratio": null,
+    "impure_revenue": 0.0177,
+    "purification_rate": 0.018,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI, MSCI",
+      "amalinvest": "Halal (B+)",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Interest-bearing liabilities $13.7B / MCap $783B = 1.75%. Prohibited income 1.77%. EVs, energy storage, solar. Clean pass with wide margins."
+  },
+  {
+    "ticker": "GOOG",
+    "name": "Alphabet Inc (Google)",
+    "sector": "Communication Services",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.013,
+    "securities_ratio": null,
+    "impure_revenue": 0.0408,
+    "purification_rate": 0.02,
+    "screener_sources": {
+      "musaffa": "DOUBTFUL",
+      "halalsignalz": "AAOIFI",
+      "halalscreener": "Halal (A+, score 92)",
+      "zoya": "Questionable (halal)",
+      "muslim_xchange": "Compliant",
+      "islamicly": "Compliant"
+    },
+    "notes": "Debt ~$59B / MCap ~$3.71T = 1.3%. Total prohibited income ~4.08% (interest 1.26% + YouTube/content ~2.8%) — passes but near 5% ceiling. Purification 1.94%. Doubtful on Musaffa/Zoya but passes AAOIFI on HalalSignalz+Muslim Xchange+Islamicly. Per user guidance: COMPLIANT with monitoring."
+  },
+  {
+    "ticker": "META",
+    "name": "Meta Platforms Inc",
+    "sector": "Communication Services",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.032,
+    "securities_ratio": null,
+    "impure_revenue": 0.0106,
+    "purification_rate": 0.02,
+    "screener_sources": {
+      "musaffa": "DOUBTFUL",
+      "halalsignalz": "AAOIFI",
+      "muslim_xchange": "Compliant",
+      "islamicly": "Compliant",
+      "sharlife": "Compliant"
+    },
+    "notes": "Debt $58.7B / MCap ~$1.5T = 3.2%. Interest income ~1.06%. Passes financial ratios. Doubtful ratings are qualitative (gambling ads, content concerns), not financial. Held in HLAL/SPUS Shariah ETFs. Per user guidance: COMPLIANT."
+  },
+  {
+    "ticker": "V",
+    "name": "Visa Inc",
+    "sector": "Financials",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Payment network (not a lender). Facilitates transactions, does not extend credit itself."
+  },
+  {
+    "ticker": "MA",
+    "name": "Mastercard Inc",
+    "sector": "Financials",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Payment processing network, not a lender. Same logic as Visa."
+  },
+  {
+    "ticker": "LLY",
+    "name": "Eli Lilly and Co",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.0482,
+    "securities_ratio": 0.0237,
+    "impure_revenue": 0.0039,
+    "purification_rate": 0.004,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "amalinvest": "Halal (A)",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt/MCap 4.82%. Securities/MCap 2.37%. Impure revenue 0.39%. One of the cleanest profiles. Diabetes (Mounjaro/Zepbound), oncology, immunology."
+  },
+  {
+    "ticker": "JNJ",
+    "name": "Johnson & Johnson",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.1052,
+    "securities_ratio": 0.1119,
+    "impure_revenue": 0.015,
+    "purification_rate": 0.015,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Debt/MCap 10.52%. Securities/MCap 11.19%. Impure revenue 1.50%. Pharma and medical devices (post-Kenvue spinoff)."
+  },
+  {
+    "ticker": "MRK",
+    "name": "Merck & Co Inc",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Pharmaceutical. Keytruda franchise, animal health. Passes all screeners."
+  },
+  {
+    "ticker": "ABBV",
+    "name": "AbbVie Inc",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.166,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "NOT HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "DISPUTED: Musaffa says no, Zoya+Muslim Xchange say yes. Debt $64.5B / MCap ~$388B = 16.6% (passes 30%). Core pharma business (Humira/Skyrizi/Rinvoq) is permissible. High absolute debt from Allergan acquisition but ratio is within threshold. Per user guidance: leaning COMPLIANT — 2 of 3 screeners pass, ratio is well under 30%."
+  },
+  {
+    "ticker": "TMO",
+    "name": "Thermo Fisher Scientific Inc",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": 0.0223,
+    "purification_rate": 0.022,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant",
+      "tabadulat": "Compliant"
+    },
+    "notes": "Impure revenue ~2.23%. Life sciences instruments, reagents, diagnostics. Clean business."
+  },
+  {
+    "ticker": "ABT",
+    "name": "Abbott Laboratories",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.01,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Medical devices (FreeStyle Libre), diagnostics, nutritionals. Diversified healthcare."
+  },
+  {
+    "ticker": "ISRG",
+    "name": "Intuitive Surgical Inc",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.0,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "halalsignalz": "AAOIFI, MSCI",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "ZERO debt on balance sheet. Cleanest profile in healthcare. Robotic surgical systems (da Vinci)."
+  },
+  {
+    "ticker": "DHR",
+    "name": "Danaher Corp",
+    "sector": "Healthcare",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL"
+    },
+    "notes": "Life sciences and diagnostics. Bioprocessing, genomics, water quality."
+  },
+  {
+    "ticker": "PG",
+    "name": "Procter & Gamble Co",
+    "sector": "Consumer Staples",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": 0.0056,
+    "purification_rate": 0.006,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Interest income $473M / revenue $84.5B = 0.56%. Consumer goods (Tide, Gillette, Pampers). No prohibited products."
+  },
+  {
+    "ticker": "PEP",
+    "name": "PepsiCo Inc",
+    "sector": "Consumer Staples",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": 0.0,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "0% revenue from haram sources. Revenue $91.85B entirely from non-alcoholic beverages and snacks (Pepsi, Lay's, Doritos, Gatorade, Quaker). Unlike rival KO, PepsiCo has NO alcohol segments."
+  },
+  {
+    "ticker": "NKE",
+    "name": "Nike Inc",
+    "sector": "Consumer Discretionary",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant",
+      "halalinvestors": "Comfortable (Business 5/5, Financial 4/5)"
+    },
+    "notes": "Athletic footwear and apparel. Clean consumer business."
+  },
+  {
+    "ticker": "CAT",
+    "name": "Caterpillar Inc",
+    "sector": "Industrials",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": 0.0074,
+    "purification_rate": 0.007,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Interest income $482M / revenue $65.3B = 0.74%. Heavy equipment manufacturer. Financial services subsidiary (Cat Financial) generates some interest income but within 5% threshold. Per deep research: compliant on Musaffa and multiple screeners."
+  },
+  {
+    "ticker": "UPS",
+    "name": "United Parcel Service Inc",
+    "sector": "Industrials",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Package delivery and logistics. Musaffa and Muslim Xchange say compliant. Zoya/Sharlife disagree — likely financial ratio borderline. Per user guidance: leaning COMPLIANT given Musaffa+Muslim Xchange consensus."
+  },
+  {
+    "ticker": "XOM",
+    "name": "Exxon Mobil Corp",
+    "sector": "Energy",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": null,
+    "securities_ratio": null,
+    "impure_revenue": null,
+    "purification_rate": 0.0,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Integrated oil and gas. Exploration, production, refining. Compliant across screeners."
+  },
+  {
+    "ticker": "CVX",
+    "name": "Chevron Corp",
+    "sector": "Energy",
+    "shariah_status": "COMPLIANT",
+    "screening_date": "2026-03-21",
+    "debt_ratio": 0.0932,
+    "securities_ratio": 0.1044,
+    "impure_revenue": 0.0207,
+    "purification_rate": 0.021,
+    "screener_sources": {
+      "musaffa": "HALAL",
+      "zoya": "Compliant",
+      "muslim_xchange": "Compliant"
+    },
+    "notes": "Interest income ratio 2.07%. Debt ratio 9.32%. Liquid assets ratio 10.44%. All three AAOIFI ratios well within limits. Clean pass."
+  }
+]
