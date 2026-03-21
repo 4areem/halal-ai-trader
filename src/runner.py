@@ -141,11 +141,20 @@ class TradeDecision:
 # Phase 1: Session Startup (agents.md 8.1)
 # ---------------------------------------------------------------------------
 
-def session_startup() -> dict:
+def _mode_label(live: bool, auto: bool) -> str:
+    """Return the execution mode label for display and logging."""
+    if not live:
+        return "DRY_RUN"
+    return "LIVE_AUTO" if auto else "LIVE_CONFIRM"
+
+
+def session_startup(live: bool = False, auto: bool = False) -> dict:
     """Fetch account, positions, market status. Returns session context dict."""
+    mode = _mode_label(live, auto)
     print("=" * 70)
     print("HALAL AI TRADER — SESSION START")
     print(f"Timestamp: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
+    print(f"Mode:      {mode}")
     print("=" * 70)
 
     # Account
@@ -240,6 +249,7 @@ def session_startup() -> dict:
     # Log session start
     log_session({
         "phase": "startup",
+        "mode": mode,
         "equity": equity,
         "cash": cash,
         "buying_power": buying_power,
@@ -842,10 +852,11 @@ def decision_phase(
 # Phase 4: Execution (agents.md 8.4)
 # ---------------------------------------------------------------------------
 
-def execution_phase(ctx: dict, decisions: list[TradeDecision], live: bool = False) -> list[dict]:
+def execution_phase(ctx: dict, decisions: list[TradeDecision], live: bool = False, auto: bool = False) -> list[dict]:
     """Execute trades. Sells first, then buys by conviction."""
+    mode = _mode_label(live, auto)
     print(f"\n{'=' * 70}")
-    print(f"EXECUTION PHASE {'(LIVE)' if live else '(DRY RUN)'}")
+    print(f"EXECUTION PHASE ({mode})")
     print("=" * 70)
 
     executed_orders = []
@@ -859,8 +870,8 @@ def execution_phase(ctx: dict, decisions: list[TradeDecision], live: bool = Fals
         key=lambda d: -d.signal_strength,  # most positive first
     )
 
-    # Live mode: show confirmation summary and require approval
-    if live and (sells or buys):
+    # Live mode: show confirmation summary and require approval (unless auto)
+    if live and not auto and (sells or buys):
         print(f"\n{'=' * 70}")
         print("ORDER CONFIRMATION — REVIEW BEFORE EXECUTION")
         print(f"{'=' * 70}")
@@ -977,7 +988,7 @@ def execution_phase(ctx: dict, decisions: list[TradeDecision], live: bool = Fals
 # Phase 5: Session Closeout (agents.md 8.5)
 # ---------------------------------------------------------------------------
 
-def session_closeout(ctx: dict, decisions: list[TradeDecision], live: bool = False):
+def session_closeout(ctx: dict, decisions: list[TradeDecision], live: bool = False, auto: bool = False):
     """Log final state, decisions, and performance metrics."""
     print(f"\n{'=' * 70}")
     print("SESSION CLOSEOUT")
@@ -1026,24 +1037,24 @@ def session_closeout(ctx: dict, decisions: list[TradeDecision], live: bool = Fal
         "total_buy_value": total_buy_value,
         "total_sell_value": total_sell_value,
         "spy": ctx.get("spy", {}),
-        "mode": "LIVE" if live else "DRY_RUN",
+        "mode": _mode_label(live, auto),
     }
     log_performance(metrics)
 
     # Log session end
     log_session({
         "phase": "closeout",
+        "mode": _mode_label(live, auto),
         "equity": equity,
         "cash": cash,
         "decisions_count": len(decisions),
         "buys": len(buys),
         "sells": len(sells),
-        "mode": "LIVE" if live else "DRY_RUN",
     })
 
     print(f"\n  Logs saved to {LOGS_DIR}/")
     print(f"\n{'=' * 70}")
-    print(f"SESSION COMPLETE — {'LIVE' if live else 'DRY RUN'}")
+    print(f"SESSION COMPLETE — {_mode_label(live, auto)}")
     print("=" * 70)
 
 
@@ -1051,10 +1062,10 @@ def session_closeout(ctx: dict, decisions: list[TradeDecision], live: bool = Fal
 # Main
 # ---------------------------------------------------------------------------
 
-def run_session(live: bool = False):
+def run_session(live: bool = False, auto: bool = False):
     """Execute a full trading session."""
     # Phase 1: Startup
-    ctx = session_startup()
+    ctx = session_startup(live=live, auto=auto)
 
     # Phase 2: Analysis
     analysis_results = analysis_phase(ctx)
@@ -1064,10 +1075,10 @@ def run_session(live: bool = False):
     decisions = decision_phase(ctx, analysis_results, position_decisions)
 
     # Phase 4: Execution
-    execution_phase(ctx, decisions, live=live)
+    execution_phase(ctx, decisions, live=live, auto=auto)
 
     # Phase 5: Closeout
-    session_closeout(ctx, decisions, live=live)
+    session_closeout(ctx, decisions, live=live, auto=auto)
 
     return decisions
 
@@ -1079,12 +1090,17 @@ def main():
         action="store_true",
         help="Execute real orders (default is dry run)",
     )
+    parser.add_argument(
+        "--auto",
+        action="store_true",
+        help="Skip confirmation prompt (requires --live)",
+    )
     args = parser.parse_args()
 
-    if args.live:
-        print("\n*** LIVE MODE — Orders will require confirmation before execution ***\n")
+    if args.auto and not args.live:
+        print("Warning: --auto has no effect without --live. Running in dry-run mode.\n")
 
-    run_session(live=args.live)
+    run_session(live=args.live, auto=args.auto and args.live)
 
 
 if __name__ == "__main__":
